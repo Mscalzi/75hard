@@ -5,7 +5,6 @@ const port = 3000;
 
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
-//LEAVING OFF AT 4:30 VIDE0 126
 process.on('uncaughtException', (err) => {
   // eslint-disable-next-line no-console
   console.log(err.name, err.message);
@@ -31,7 +30,7 @@ mongoose
   })
   .then(() => {
     // eslint-disable-next-line no-console
-    //  console.log('db connected');
+     console.log('db connected');
   });
 
 const server = app.listen(port, () => {
