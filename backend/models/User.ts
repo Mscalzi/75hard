@@ -3,7 +3,7 @@ import mongoose, { Schema, model } from 'mongoose';
 import validator from 'validator';
 import bcrypt from 'bcryptjs';
 
-export interface User extends mongoose.Document {
+export interface UserI {
   name: string;
   email: string;
   password: string;
@@ -19,7 +19,7 @@ export interface User extends mongoose.Document {
   changedPasswordAfter(JWTTimestamp: number): boolean;
 }
 
-const userSchema = new Schema<User>({
+const userSchema = new Schema<UserI>({
   name: {
     type: String,
     required: [true, 'Please tell us your name'],
@@ -122,4 +122,4 @@ userSchema.methods.createPasswordResetToken = function () {
   return resetToken;
 };
 
-export const User = model('User', userSchema);
+export const User = model<UserI>('User', userSchema);

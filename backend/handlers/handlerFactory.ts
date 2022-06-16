@@ -1,9 +1,10 @@
-import { Models } from '../models';
 import { Request, Response, NextFunction } from 'express';
 import { catchAsync } from '../utils/catchAsync';
 import { AppError } from '../utils/AppError';
+import mongoose from 'mongoose';
 
-export const getOne = (Model: Models) => {
+
+export const getOne = (Model: typeof mongoose.Model) => {
   catchAsync(async (req: Request, res: Response, next: NextFunction) => {
     const model = await Model.findById(req.params.id);
     if (!model) {
@@ -16,7 +17,7 @@ export const getOne = (Model: Models) => {
   });
 };
 
-export const getAll = async (Model: Models) => {
+export const getAll = async (Model: typeof mongoose.Model) => {
   catchAsync(async (req: Request, res: Response, next: NextFunction) => {
     const models = await Model.find();
     return res.status(200).json({
@@ -26,7 +27,7 @@ export const getAll = async (Model: Models) => {
   });
 };
 
-export const createOne = async (Model: Models) => {
+export const createOne = async (Model: typeof mongoose.Model) => {
   catchAsync(async (req: Request, res: Response, next: NextFunction) => {
     const model = await Model.create(req.body);
     if (!model) {
@@ -39,7 +40,7 @@ export const createOne = async (Model: Models) => {
   });
 };
 
-export const deleteOne = async (Model: Models) => {
+export const deleteOne = async (Model: typeof mongoose.Model) => {
   catchAsync(async (req: Request, res: Response, next: NextFunction) => {
     const model = await Model.findByIdAndDelete(req.params.id);
     if (!model) {
@@ -49,7 +50,7 @@ export const deleteOne = async (Model: Models) => {
   });
 };
 
-export const updateOne = async (Model: Models) => {
+export const updateOne = async (Model: typeof mongoose.Model) => {
   catchAsync(async (req: Request, res: Response, next: NextFunction) => {
     const model = await Model.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
