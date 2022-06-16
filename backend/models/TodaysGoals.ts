@@ -1,22 +1,19 @@
 import { Schema, model } from 'mongoose';
 
-interface Goal {
+export interface Goal {
   completed: boolean;
   goal: string;
+  date: Date;
 };
 
-interface Goals {
-  goal: Goal[];
-};
-
-const goalsSchema = new Schema<Goals>({
-  goal: [
+const goalsSchema = new Schema<Goal>({
+  goal:
     {
       completed: Boolean,
       goal: String,
     },
-  ],
+  date: Date,
 });
 
-const TodaysGoals = model<Goals>('TodaysGoals', goalsSchema);
-module.exports = TodaysGoals;
+export const TodaysGoals = model<Goal>('TodaysGoals', goalsSchema);
+// module.exports = TodaysGoals;
