@@ -1,6 +1,6 @@
-import { Schema, model } from 'mongoose';
+import { Schema, model, Document } from 'mongoose';
 
-export interface Goal {
+export interface Goal extends Document {
   completed: boolean;
   goal: string;
   date: Date;
@@ -9,11 +9,16 @@ export interface Goal {
 const goalsSchema = new Schema<Goal>({
   goal:
     {
-      completed: Boolean,
+      completed: {
+        type: Boolean,
+        default: false,
+      },
       goal: String,
     },
-  date: Date,
+  date: {
+    type: Date,
+    default: Date.now,
+  },
 });
 
 export const TodaysGoals = model<Goal>('TodaysGoals', goalsSchema);
-// module.exports = TodaysGoals;
