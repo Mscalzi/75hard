@@ -1,3 +1,5 @@
-import { TodaysGoals } from '../models/TodaysGoals';
+import * as goals from '../models/TodaysGoals';
+import * as userModel from './User';
 
-export type Models = typeof TodaysGoals;
+export * from './TodaysGoals';
+export * from './User';

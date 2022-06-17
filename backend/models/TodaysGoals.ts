@@ -1,6 +1,6 @@
-import { Schema, model, Document } from 'mongoose';
+import { Schema, model } from 'mongoose';
 
-export interface Goal extends Document {
+export interface Goal {
   completed: boolean;
   goal: string;
   date: Date;
