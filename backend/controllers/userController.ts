@@ -1,5 +1,5 @@
 import { getOne, updateOne, createOne, deleteOne, getAll } from './handlerFactory';
-import { Request } from 'express';
+import { Request, Response } from 'express';
 import multer from 'multer';
 import sharp from 'sharp';
 import { User } from '../models/User';
