@@ -1,11 +1,10 @@
-import { Request, Response, NextFunction } from 'express';
-import { catchAsync } from '../utils/catchAsync';
-import { AppError } from '../utils/AppError';
-import mongoose from 'mongoose';
+const { Request, Response, NextFunction } = require('express');
+const { catchAsync, AppError } = require('../utils');
+const mongoose = require('mongoose');
 
 
 export const getOne = (Model: typeof mongoose.Model) => {
-  catchAsync(async (req: Request, res: Response, next: NextFunction) => {
+  catchAsync(async (req: Request, res: Response, next: Function) => {
     const model = await Model.findById(req.params.id);
     if (!model) {
       return next(new AppError(`No ${Model.modelName} found with that ID`, 404));
@@ -18,7 +17,7 @@ export const getOne = (Model: typeof mongoose.Model) => {
 };
 
 export const getAll = async (Model: typeof mongoose.Model) => {
-  catchAsync(async (req: Request, res: Response, next: NextFunction) => {
+  catchAsync(async (req: Request, res: Response, next: Function) => {
     const models = await Model.find();
     return res.status(200).json({
       status: 'success',

@@ -5,6 +5,8 @@ const port = 3000;
 
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
+const goalsRouter = require('./routes/goals.ts');
+
 process.on('uncaughtException', (err) => {
   // eslint-disable-next-line no-console
   console.log(err.name, err.message);
@@ -32,6 +34,9 @@ mongoose
     // eslint-disable-next-line no-console
      console.log('db connected');
   });
+
+app.use(express.json());
+app.use('/api/v1/goals', goalsRouter);
 
 const server = app.listen(port, () => {
   // eslint-disable-next-line no-console
